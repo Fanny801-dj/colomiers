@@ -3,7 +3,7 @@
 <footer class="main-footer">
     <div class="footer-container">
         <div class="footer-left">
-            <img src="../../assets/Logo_Colomiers_Football.svg" alt="Logo US Colomiers" class="footer-logo">
+            <img src="./assets/Logo_Colomiers_Football.svg" alt="Logo US Colomiers" class="footer-logo">
             <a href="php/admin/login.php" class="admin-link">Admin</a>
         </div>
 
