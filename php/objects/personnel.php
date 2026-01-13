@@ -1,9 +1,9 @@
 <?php 
 
 class Personnel {
-    protected $nom;
-    protected $prenom;
-    protected $role;
+    public $nom;
+    public $prenom;
+    public $role;
 
 }
 

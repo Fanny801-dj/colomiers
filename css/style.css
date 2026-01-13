@@ -1,16 +1,15 @@
-<<<<<<<<< Temporary merge branch 1
-.block-tall {
+.autresequipes-block-tall {
     overflow: hidden;
 }
 
-.block-tall img {
+.autresequipes-block-tall img {
     max-width: 100%;
     display: block;
     height: auto;
 }
 /* Page autresequipes.php */
-body {
-    min-height: 100%;
+.autresequipes-body {
+    min-height: 100vh;
     min-width: 100%;
     margin: 0;
     padding: 0;
@@ -20,7 +19,7 @@ body {
     box-sizing: border-box;
 }
 
-.container {
+.autresequipes-container {
     flex: 1 1 auto;
     width: 100%;
     min-height: 100%;
@@ -32,12 +31,11 @@ body {
     background: #fff;
 }
 
-aside {
+.autresequipes-aside {
     text-align: center;
     margin-top: 10px;
 }
-
-.autres-equipes {
+.autresequipes-autres-equipes {
     background: #e0e0e0;
     display: inline-block;
     padding: 8px 24px;
@@ -46,26 +44,26 @@ aside {
     margin-bottom: 20px;
 }
 
-main {
+.autresequipes-main {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-section {
+.autresequipes-section {
     width: 100%;
     margin-bottom: 30px;
     text-align: center;
 }
 
-section h2 {
+.autresequipes-section h2 {
     font-size: 1.1em;
     margin: 18px 0 14px 0;
     font-weight: normal;
 }
 
-.image-large {
+.autresequipes-image-large {
     background: #ddd;
     border-radius: 2px;
     margin: 0 auto 16px auto;
@@ -74,14 +72,14 @@ section h2 {
     max-width: 350px;
 }
 
-.image-small-row {
+.autresequipes-image-small-row {
     display: flex;
     justify-content: center;
     gap: 16px;
     margin-bottom: 16px;
 }
 
-.image-small1, .image-small2 {
+.autresequipes-image-small1, .autresequipes-image-small2 {
     background: #ddd;
     border-radius: 2px;
     width: 40%;
@@ -89,27 +87,27 @@ section h2 {
     max-width: 150px;
 }
 
-.block-row {
+.autresequipes-block-row {
     display: flex;
     justify-content: center;
     margin-bottom: 16px;
     flex-wrap: wrap;
 }
 
-.block {
+.autresequipes-block {
     background: #ddd;
     border-radius: 2px;
     margin: 0 auto 16px auto;
 }
 
-.block-tall {
+.autresequipes-block-tall {
     width: 28%;
     min-width: 80px;
     max-width: 120px;
     /* La hauteur s'adapte au contenu */
 }
 
-footer {
+.autresequipes-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -119,26 +117,26 @@ footer {
     border-top: 1px solid #e0e0e0;
 }
 
-.block-tall {
+.autresequipes-block-tall {
     overflow: hidden;
 }
 
-.block-tall img {
+.autresequipes-block-tall img {
     max-width: 100%;
     display: block;
     height: auto;
 }
 
-.footer-left span {
+.autresequipes-footer-left span {
     margin-right: 12px;
 }
 
-.footer-right {
+.autresequipes-footer-right {
     display: flex;
     gap: 6px;
 }
 
-.footer-btn {
+.autresequipes-footer-btn {
     width: 24px;
     height: 24px;
     background: #0026ff;
@@ -148,24 +146,24 @@ footer {
 }
 
 @media (min-width: 700px) {
-    .container {
+    .autresequipes-container {
         width: 100%;
         padding: 0 48px;
     }
-    .image-large {
+    .autresequipes-image-large {
         height: 140px;
         max-width: 600px;
     }
-    .image-small1, .image-small2 {
+    .autresequipes-image-small1, .autresequipes-image-small2 {
         height: 100px;
         max-width: 250px;
     }
-    .block-tall {
+    .autresequipes-block-tall {
         min-width: 180px;
         max-width: 260px;
         /* Hauteur auto sur grand écran aussi */
     }
-    .footer-btn {
+    .autresequipes-footer-btn {
         width: 32px;
         height: 32px;
     }
@@ -189,10 +187,6 @@ footer {
     --dark-blue: #0A0E2D;   
     --platinum: #EAEDEE;       
     --white: #FFFFFF;
-}
-
-body {
-    margin: 0;
 }
 
 /* --- STYLE GENERAL DU HEADER --- */
@@ -267,9 +261,8 @@ body {
     color: var(--primary-blue);
 }
 
-/* --- BOUTONS BOUTIQUE --- */
-.btn-boutique,
-.btn-boutique-footer {
+/* --- BOUTON BOUTIQUE  --- */
+.btn-boutique {
     background-color: var(--primary-blue);
     color: var(--white);
     padding: 10px 24px;
@@ -278,20 +271,17 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 0.9rem;
-
     box-shadow: 0 4px 0 #0000A0, 0 6px 10px rgba(0,0,239,0.3);
     transition: all 0.2s ease;
     display: inline-block;
 }
 
-.btn-boutique:hover,
-.btn-boutique-footer:hover {
+.btn-boutique:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 0 #0000A0, 0 8px 15px rgba(0,0,239,0.4);
 }
 
-.btn-boutique:active,
-.btn-boutique-footer:active {
+.btn-boutique:active {
     transform: translateY(2px);
     box-shadow: 0 2px 0 #0000A0;
 }
@@ -313,7 +303,8 @@ body {
     padding: 0 20px;
 }
 
-/* --- FOOTER ELEMENTS --- */
+
+/* --- FOOTER --- */
 
 .footer-left {
     display: flex;
@@ -373,3 +364,25 @@ body {
     background-color: #0000A0;
 }
 
+/* Bouton boutique du footer */
+.btn-boutique-footer {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    padding: 8px 18px;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    box-shadow: 0 3px 0 #0000A0;
+    transition: all 0.2s ease;
+}
+
+.btn-boutique-footer:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 0 #0000A0;
+}
+
+.btn-boutique-footer:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 0 #0000A0;
+}
