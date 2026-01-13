@@ -1,3 +1,5 @@
+<!-- include './php/components/header.php' -->
+
 <header class="main-header">
     <div class="header-container">
         <div class="header-left">
@@ -11,7 +13,7 @@
             <ul>
                 <li><a href="#">Le Club</a></li>
                 <li><a href="#">National 3</a></li>
-                <li><a href="#">Autres équipes</a></li>
+                <li><a href="./autresequipes.php">Autres équipes</a></li>
                 <li><a href="#">Actualités</a></li>
             </ul>
         </nav>

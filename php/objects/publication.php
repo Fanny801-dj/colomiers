@@ -2,9 +2,9 @@
 
 class Publication {
     protected $id;
-    protected $titre;
-    protected $texte;
-    protected $image;
+    public $titre;
+    public $texte;
+    public $image;
 
 }
 

@@ -1,3 +1,5 @@
+<!-- include './php/components/footer.php' -->
+
 <link rel="stylesheet" href="../../css/style.css">
 
 <footer class="main-footer">
