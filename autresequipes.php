@@ -1,10 +1,5 @@
-<?php
-include __DIR__ . "/configuration/config.php";
-include __DIR__ . "/php/database.php";
-$database = Database::getInstance()->getConnection();
-$query = $database->query("SELECT * FROM equipe");
-$equipes = $query->fetchAll(PDO::FETCH_ASSOC);
-?>
+<?php include __DIR__ . "/php/database.php" ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -21,30 +16,29 @@ $equipes = $query->fetchAll(PDO::FETCH_ASSOC);
         </aside>
         <main>
             <section class="section-feminine">
-                <h2>Section féminine</h2>
+                <h2>Section féminine 1ère</h2>
                 <?php
-                $feminines = [];
-                foreach ($equipes as $equipe) {
-                    if (stripos($equipe['nom'], 'Féminine') !== false) {
-                        $feminines[] = $equipe;
-                    }
-                }
+
+                $feminines = Database::getInstance()->loadEquipe();
+
+                $femines
+
                 ?>
                 <div class="block-row">
                 <?php foreach ($feminines as $feminine): ?>
                     <div class="block block-tall">
-                        <img src="image.jpg" alt="image équipe féminine">
+                        <!-- pas d'image pour les équipes -->
                         <div class="equipe-info">
-                            <strong><?= $feminine['nom'] ?></strong><br>
-                            <a href="<?= $feminine['lien_calendrier'] ?>" target="_blank">Calendrier</a> |
-                            <a href="<?= $feminine['lien_classement'] ?>" target="_blank">Classement</a>
+                            <strong><?= $feminine->nom ?></strong><br>
+                            <a href="<?=  $feminine->lien_calendrier ?>" target="_blank">Calendrier</a> |
+                            <a href="<?=  $feminine->lien_classement ?>" target="_blank">Classement</a>
                         </div>
                     </div>
                 <?php endforeach; ?>
                 </div>
             </section>
             <section class="section-jeunes">
-                <h2>Sections jeunes</h2>
+                <h2>Autres sections</h2>
                 <?php
                 $jeunes = [];
                 foreach ($equipes as $equipe) {
