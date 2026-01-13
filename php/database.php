@@ -5,7 +5,8 @@
 // $a = $query->fetchAll(PDO::FETCH_ASSOC);
 // print_r($a);
 
-include "../configuration/config.php";
+include __DIR__."/../configuration/config.php";
+include __DIR__ . "/objects/article.php";
 
 class Database {
     private static $instance = null;
@@ -40,6 +41,53 @@ class Database {
     public function getConnection(){
         return $this->connection;
     }
+
+    public function loadArticle() {
+
+        //fonction qui crée les objets en fonction des données de la base de donnée
+    }
+    public function loadArticles(): array {
+        $articles = [];
+
+        $sql = "SELECT * FROM article ORDER BY date_publication DESC";
+        $query = $this->connection->query($sql);
+
+        $rows = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($rows as $row) {
+            $articles[] = new Article(
+                $row['date_publication'],
+                $row['titre'],
+                $row['contenu'],
+                $row['image'],
+                $row['categorie']
+            );
+        }
+
+        return $articles;
+    }
+
+    public function loadHistory(): array {
+        $histoires = [];
+
+        $sql = "SELECT * FROM histoires ORDER BY date_tranche DESC";
+        $query = $this->connection->query($sql);
+
+        $rows = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($rows as $row) {
+            $articles[] = new Article(
+                $row['tranche_date'],
+                $row['titre'],
+                $row['contenu'],
+                $row['image'],
+                $row['categorie']
+            );
+        }
+
+        return $articles;
+    }
+
 }
 
 

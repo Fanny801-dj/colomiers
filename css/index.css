@@ -1,0 +1,222 @@
+/* --- HERO SECTION --- */
+.hero-section {
+    background-color: #A0A0A0;
+    background-size: cover;
+    background-position: center;
+    padding: 100px 20px 140px 20px;
+    text-align: center;
+    color: var(--dark-blue);
+}
+
+.hero-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.hero-subtitle {
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* --- BLOC MATCH & MÉTÉO --- */
+.match-weather-container {
+    max-width: 900px;
+    margin: -80px auto 60px auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+}
+
+.match-box {
+    background-color: var(--platinum);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    flex-wrap: wrap;
+}
+
+.match-info {
+    flex: 2;
+    text-align: center;
+}
+
+.match-label {
+    display: block;
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-weight: bold;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.versus {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--dark-blue);
+    margin-bottom: 5px;
+}
+
+.vs {
+    color: var(--primary-blue);
+    margin: 0 10px;
+}
+
+.date-time {
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-size: 1.1rem;
+}
+
+.separator {
+    width: 1px;
+    height: 60px;
+    background-color: #ccc;
+    margin: 0 30px;
+}
+
+.weather-info {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.weather-label {
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.weather-data {
+    font-size: 2rem;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--dark-blue);
+    margin: 5px 0;
+}
+
+/* --- ACTUS --- */
+.section-title {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2rem;
+    color: var(--dark-blue);
+    margin-bottom: 40px;
+}
+
+.news-section .container,
+.partners-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.news-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Style spécifique pour l'image Actu (grise par défaut) */
+.news-img {
+    display: block;
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    background-color: #D3D3D3; /* La couleur grise s'affiche même si src est vide */
+}
+
+.news-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.news-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    margin: 0 0 10px 0;
+    color: var(--dark-blue);
+}
+
+.news-meta {
+    font-family: 'PT Sans Narrow', sans-serif;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.read-more {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'PT Sans Narrow', sans-serif;
+}
+
+/* --- PARTENAIRES --- */
+.partners-section {
+    margin-bottom: 80px;
+}
+
+.partners-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.partner-box {
+    text-align: center;
+    width: 150px;
+}
+
+/* Style spécifique pour le logo partenaire (gris par défaut) */
+.partner-logo {
+    display: block;
+    width: 100%;
+    height: 100px;
+    object-fit: contain;
+    background-color: #D3D3D3; /* Couleur grise placeholder */
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.partner-name {
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-size: 0.9rem;
+    color: var(--dark-blue);
+}
+
+@media (max-width: 768px) {
+    .hero-title { font-size: 2rem; }
+    
+    .match-box {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .separator {
+        width: 100%;
+        height: 1px;
+        margin: 20px 0;
+    }
+}
