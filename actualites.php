@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actualités - US Colomiers</title>
     
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
@@ -20,7 +21,7 @@
             <button class="filter-btn">Équipe 1</button>
             <button class="filter-btn">Jeunes</button>
             <button class="filter-btn">Club</button>
-        </section>
+    <title>Actualité<script type="module" src=""></script></title>
 
         <div class="news-grid">
             <?php
