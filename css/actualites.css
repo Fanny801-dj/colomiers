@@ -1,10 +1,8 @@
-/* Style pour la page actualites.php */
-
+/* Styles de base pour mobile */
 .actualites-container {
     width: 100%;
-    max-width: 1200px;   /* optionnel mais recommandé */
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 10px;
     box-sizing: border-box;
 }
 
@@ -14,12 +12,13 @@
 }
 
 .actualites-header h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: #333;
 }
 
 .actualites-filtres {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
     margin-bottom: 20px;
@@ -46,9 +45,9 @@
 
 .actualites-row {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin: 20px;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
 }
 
 .actualites-item {
@@ -74,8 +73,35 @@
     object-fit: cover;
     display: block;
 }
+
 .actualites-item p {
     font-size: 1rem;
     color: #333;
     text-align: center;
+}
+
+/* Styles pour les tablette*/
+@media (min-width: 600px) {
+    .actualites-header h1 {
+        font-size: 2rem;
+    }
+
+    .actualites-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Styles pour les écrans plus larges (ordinateurs) */
+@media (min-width: 1024px) {
+    .actualites-row {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .actualites-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .actualites-container {
+        max-width: 1200px;
+    }
 }

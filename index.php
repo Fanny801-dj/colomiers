@@ -1,5 +1,4 @@
 <?php include __DIR__ . "/php/database.php" ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -16,6 +15,7 @@
 </head>
 
 <body>
+
     <?php include "./php/components/header.php";?>
 
     <section class="hero-section">
@@ -55,6 +55,8 @@
             <h2 class="section-title">Dernières Actus</h2>
             
             <div class="news-grid">
+
+
                 <?php
                 
                 $lastactus = Database::getInstance()->loadArticles();
@@ -67,7 +69,6 @@
                     if($counter <= 3): //vérification qu'on a bien que 3 articles à la une
                 
                 ?>
-
                 <article class="news-card">
                     <img src="" alt="Image Actualité" class="news-img">
                     
@@ -75,6 +76,7 @@
                         <h3 class="news-title"><?php echo $actu->titre; ?></h3>
                         <p class="news-meta"><?php echo $actu->categorie; ?> - <?php echo $actu->date; ?></p>
                         <a href="#" class="read-more">Lire l'article</a>
+                        <a href=""></a>
                     </div>
                 </article>
 

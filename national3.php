@@ -1,11 +1,4 @@
-<?php include __DIR__ . "/php/database.php"; 
-
-// Récupérer la connexion via la méthode getInstance()
-$database = Database::getInstance();
-$pdo = $database->getConnection();  // Récupère la connexion PDO
-?>
-
-
+<?php include __DIR__ . "/php/database.php" ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -23,17 +16,17 @@ $pdo = $database->getConnection();  // Récupère la connexion PDO
 </head>
 
 <body>
+    <main>
     <?php include "./php/components/header.php";?>
 
     <section class="hero-nat3">
             <h1>National 3</h1>
     </section>
 
-      <section class="image-container">
+      <section class="image-nat3">
         <img src="https://www.colomiersfoot.fr/Photo_20officielle_20N3_20-_20saison_202025-20261.jpg?v=234tb42gzagb22rk" alt="National 3">
 </section>
 
-<section class="joueurs-grid">
 <?php
 $gardiens = $pdo->query("SELECT * FROM joueur WHERE role = 'Gardien de but' ORDER BY nom")->fetchAll();
 $defenseurs = $pdo->query("SELECT * FROM joueur WHERE role = 'Défenseur' ORDER BY nom")->fetchAll();
@@ -79,7 +72,41 @@ $attaquants = $pdo->query("SELECT * FROM joueur WHERE role = 'Attaquant' ORDER B
   <?php endforeach; ?> 
 </div>
 
+    <section class="section-stats">
+    <div class="stat-container">
+        <h2>Classement</h2>
+        <div class="affichage-classement">
+            </div>
+    </div>
+
+    <div class="stat-container">
+        <h2>Calendrier</h2>
+        <div class="affichage-calendrier">
+            </div>
+    </div>
+
+    <div>
+        <h2>Meilleurs Buteurs</h2>
+        <div class="liste-buteurs">
+            <div class="fiche-buteur">
+                <div class="photo-buteur"></div>
+                <p class="infos-buteur">Nom Prénom - 0 Buts</p>
+            </div>
+            <div class="fiche-buteur">
+                <div class="photo-buteur"></div>
+                <p class="infos-buteur">Nom Prénom - 0 Buts</p>
+            </div>
+            <div class="fiche-buteur">
+                <div class="photo-buteur"></div>
+                <p class="infos-buteur">Nom Prénom - 0 Buts</p>
+            </div>
+        </div>
+    </div>
+</section>
+
     <?php include "./php/components/footer.php"; ?>
+
+    </main>
 </body>
 
 </html>
