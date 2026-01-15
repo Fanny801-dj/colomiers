@@ -78,7 +78,6 @@
                             <button type="submit" class="btn-admin">Enregistrer les modifications</button>
                         </form>
                     </div>
-
                 </div>
             </details>
         </section>
@@ -290,7 +289,7 @@
                                     <td><?php echo $article->image?></td>
                                     <td> <button 
                                                 type="button" 
-                                                class="action-btn btn-edit"
+                                                class="action-btn btn-edit btn-article-edit"
                                                 data-id="<?php echo htmlspecialchars($article->id, ENT_QUOTES) ?>"
                                                 data-titre="<?php echo htmlspecialchars($article->titre, ENT_QUOTES) ?>"
                                                 data-taxonomie="<?php echo htmlspecialchars($article->categorie, ENT_QUOTES) ?>"
@@ -306,9 +305,9 @@
                         </tbody>
                     </table>
 
-                    <div class="edit-simulation-area">
+                    <div class="edit-simulation-area hidden">
                         <p class="simulation-title">Modification Article : <span id="titre-article-edit"></span></p>
-                        <form method="POST" class="hidden" action="./php/backoffice.php" id="edit-article">
+                        <form method="POST" action="./php/backoffice.php" id="edit-article">
                             <input type="hidden" name="action" value="edit-article">
                             <input type="hidden" name="id" value="">
                             <div class="form-group">
