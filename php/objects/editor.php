@@ -19,6 +19,15 @@ class Editor {
         $this->nom = $nom;
     }
 
+    public function delete() {
+         // pas de table dans la base de donnée donc suppression logique
+        $this->id = null;
+        $this->nom = null;
+        $this->prenom = null;
+        $this->email = null;
+        $this->pwd = null;
+    }
+
 }
 
 ?>

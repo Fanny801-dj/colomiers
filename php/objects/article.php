@@ -25,7 +25,7 @@ class Article extends Publication {
         }
 
         $db = Database::getInstance()->getConnection();
-        $stmt = $db->prepare("DELETE FROM article WHERE id_article = :id");
+        $stmt = $db->prepare("DELETE FROM article WHERE id_article = :id"); // attention 
         $stmt->execute(['id' => $this->id]);
 
         $this->id = null;
@@ -55,20 +55,6 @@ class Article extends Publication {
                 'email' => $this->email
             ]);
         }
-    }
-
-    DELETE
-
-    public function delete() {
-        if ($this->id === null) {
-            return;
-        }
-
-        $db = Database::getConnection();
-        $stmt = $db->prepare("DELETE FROM users WHERE id = :id");
-        $stmt->execute(['id' => $this->id]);
-
-        $this->id = null;
     }
 }
 
