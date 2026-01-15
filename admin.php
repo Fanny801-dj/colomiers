@@ -195,16 +195,17 @@
         </section>
 
         <section class="admin-section">
-            <h2 class="admin-subtitle">Histoires du Club</h2>
+            <h2 class="admin-subtitle">Histoire du club</h2>
 
             <details class="admin-details">
-                <summary>Gérer les Histoires / Dates clés</summary>
+                <summary>Gérer les sections d'histoire du club</summary>
                 <div style="padding: 20px;">
                     
-                    <h3>+ Ajouter une date clé</h3>
-                    <form action="#" method="POST" class="admin-form">
-                        <div class="form-group"><label>Titre</label><input type="text"></div>
-                        <button class="btn-admin">Publier</button>
+                    <h3>+ Ajouter une histoire</h3>
+                    <form action="./php/backoffice.php" method="POST" class="admin-form">
+                        <input type="hidden" name="action" value="create-history">
+                        <div class="form-group"><label>Titre</label><input name="history-name" type="text"></div>
+                        <button type="submit" class="btn-admin">Publier</button>
                     </form>
 
                     <br>
@@ -212,36 +213,55 @@
                     <table class="admin-table">
                         <thead>
                             <tr>
-                                <th>Période</th>
                                 <th>Titre</th>
+                                <th>Tranche de dates</th>
+                                <th>texte</th>
+                                <th>image</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1936</td>
-                                <td>Fondation du club</td>
-                                <td><button class="action-btn btn-edit">Modifier</button></td>
-                            </tr>
+                            <?php foreach(Database::getInstance()->loadHistories() as $history):?>
+                                <tr>
+                                    <td><?php echo $history->titre ?></td>
+                                    <td><?php echo $history->tranche_de_date ?></td>
+                                    <td><?php echo $history->texte ?></td>
+                                    <td><?php echo $history->image?></td>
+                                    <td> <button 
+                                                type="button" 
+                                                class="action-btn btn-edit btn-histoire-edit"
+                                                data-id="<?php echo htmlspecialchars($history->id, ENT_QUOTES) ?>"
+                                                data-titre="<?php echo htmlspecialchars($history->titre, ENT_QUOTES) ?>"
+                                                data-tranche_de_date="<?php echo htmlspecialchars($history->tranche_de_date, ENT_QUOTES) ?>"
+                                                data-texte="<?php echo htmlspecialchars($history->texte, ENT_QUOTES) ?>"
+                                                data-image="<?php echo htmlspecialchars($history->image, ENT_QUOTES) ?>"
+                                            >Modifier</button>  <form method="POST" action="./php/backoffice.php">                        
+                                            <input type="hidden" name="action" value="delete-histoire">
+                                            <input type="hidden" name="id" value="<?php echo htmlspecialchars($history->id, ENT_QUOTES) ?>">
+                                            <button class="action-btn btn-delete">Supprimer</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
 
-                    <div class="edit-simulation-area">
-                        <p class="simulation-title">Modification Histoire : FONDATION DU CLUB</p>
-                        <form action="#" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="id" value="1">
-                            
+                    <div class="edit-simulation-area hidden">
+                        <p class="simulation-title">Modification Article : <span id="titre-history-edit"></span></p>
+                        <form method="POST" action="./php/backoffice.php" id="edit-history">
+                            <input type="hidden" name="action" value="edit-article">
+                            <input type="hidden" name="id" value="">
                             <div class="form-group">
                                 <label>Titre de l'événement :</label>
-                                <input type="text" name="titre" value="Fondation du club">
+                                <input type="text" name="titre" placeholder="Fête du sport">
                             </div>
                             <div class="form-group">
-                                <label>Période / Date (ex: 1990-2000) :</label>
-                                <input type="text" name="date" value="1936">
+                                <label>Taxonomie :</label>
+                                <input type="text" name="taxonomie" placeholder="Vie du club" value="">
                             </div>  
                             <div class="form-group">
                                 <label>Récit complet :</label>
-                                <textarea name="texte" rows="6">Tout a commencé en 1936 lorsque...</textarea>
+                                <textarea name="texte" rows="6" placeholder="On va boire un coup...."></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Image d'illustration :</label>
@@ -294,6 +314,7 @@
                                                 data-titre="<?php echo htmlspecialchars($article->titre, ENT_QUOTES) ?>"
                                                 data-taxonomie="<?php echo htmlspecialchars($article->categorie, ENT_QUOTES) ?>"
                                                 data-texte="<?php echo htmlspecialchars($article->texte, ENT_QUOTES) ?>"
+                                                data-image="<?php echo htmlspecialchars($article->image, ENT_QUOTES) ?>"
                                             >Modifier</button>  <form method="POST" action="./php/backoffice.php">                        
                                             <input type="hidden" name="action" value="delete-article">
                                             <input type="hidden" name="id" value="<?php echo htmlspecialchars($article->id, ENT_QUOTES) ?>">
