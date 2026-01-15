@@ -2,7 +2,7 @@
     <div class="footer-container container">
         <div class="footer-left">
             <img src="assets/Logo_Colomiers_Football.svg" alt="Logo US Colomiers" class="footer-logo">
-            <a href="php/admin/login.php" class="admin-link">Admin</a>
+            <a href="./login.php" class="admin-link">Admin</a>
         </div>
 
         <div class="footer-center">

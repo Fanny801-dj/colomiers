@@ -716,6 +716,28 @@ a { text-decoration: none; color: inherit; transition: 0.3s; }
     display: none;
 }
 
+
+.formulaire {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 40%;
+}
+
+.form input, .form button {
+    padding: 20px;
+}
+
+.form button {
+    background: #003366;
+    color: white;
+    cursor: pointer;
 /* 
 PAGE ADMINISTRATION */
 
