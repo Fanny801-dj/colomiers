@@ -19,26 +19,44 @@ class Histoire extends Publication {
         }
 
         $db = Database::getInstance()->getConnection();
-        $stmt = $db->prepare("DELETE FROM histoires WHERE id_histoire = :id");
+        $stmt = $db->prepare("DELETE FROM histoire WHERE id_histoire = :id");
         $stmt->execute(['id' => $this->id]);
 
         $this->id = null;
     }
 
-    public function create() {
+    public function save() {
         $db = Database::getInstance()->getConnection();
 
-        $sql = "INSERT INTO histoire (titre, tranche_date, image)
-            VALUES (:titre, :tranche_date, :image)";
-        $stmt = $db->prepare($sql);
-        $stmt->execute([
-        'titre' => $this->titre,
-        'tranche_date' => $this->tranche_de_date,
-        'image' => $this->image
+        if ($this->id === null) {
+            // CREATE
+            $sql = "INSERT INTO histoire (titre, tranche_date, image)
+                VALUES (:titre, :tranche_date, :image)";
+            $stmt = $db->prepare($sql);
+            $stmt->execute([
+            'titre' => $this->titre,
+            'tranche_date' => $this->tranche_de_date,
+            'image' => $this->image
         ]);
-
-        $this->id = (int)$db->lastInsertId();
+            $this->id = (int)$db->lastInsertId();
+        } else {
+            // UPDATE
+            $sql = "UPDATE histoire 
+                SET titre = :titre, 
+                    tranche_date = :tranche_date, 
+                    image = :image
+                WHERE id_histoire = :id";
+            $stmt = $db->prepare($sql);
+            $stmt->execute([
+            'id' => $this->id,
+            'titre' => $this->titre,
+            'tranche_date' => $this->tranche_de_date,
+            'image' => $this->image
+        ]);
     }
+}
+
+
 
 
 }
