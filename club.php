@@ -1,3 +1,4 @@
+<?php include __DIR__ . "/php/database.php" ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,9 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Document</title>
 </head>
-<?php
- include "./php/components/header.php";
-?>
+<?php include "./php/components/header.php"; ?>
 <body>
  <main>
     <h1>Le Club</h1>

@@ -1,4 +1,19 @@
-<?php include __DIR__ . '/configuration/config.php'; ?>
+<?php include __DIR__ . "/php/database.php" ?>
+
+<?php 
+
+// ici tous les formulaires (modèle pour article)
+
+if (isset($_POST["action"])) {
+    if ($_POST["action"] == "create-article") {
+        $articleGen = new Article(null, null, null, $_POST['article-name'], null, null);
+        $articleGen->save();
+        header('Location: admin.php?success=article-created'); // ligne pour éviter de faire 2 fois la même action
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -243,6 +258,71 @@
                             <div class="form-group">
                                 <label>Récit complet :</label>
                                 <textarea name="texte" rows="6">Tout a commencé en 1936 lorsque...</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Image d'illustration :</label>
+                                <input type="file" name="image">
+                            </div>
+                            <button type="submit" class="btn-admin">Sauvegarder l'histoire</button>
+                        </form>
+                    </div>
+                </div>
+            </details>
+        </section>
+
+        <section class="admin-section">
+            <h2 class="admin-subtitle">Articles de blogs</h2>
+
+            <details class="admin-details">
+                <summary>Gérer les articles de blogs du club</summary>
+                <div style="padding: 20px;">
+                    
+                    <h3>+ Ajouter un article</h3>
+                    <form action="#" method="POST" class="admin-form">
+                        <input type="hidden" name="action" value="create-article">
+                        <div class="form-group"><label>Titre</label><input name="article-name" type="text"></div>
+                        <button type="submit" class="btn-admin">Publier</button>
+                    </form>
+
+                    <br>
+
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Taxonomie</th>
+                                <th>Titre</th>
+                                <th>Contenu</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach(Database::getInstance()->loadArticles() as $article):?>
+                                <tr>
+                                    <td><?php echo $article->categorie ?></td>
+                                    <td><?php echo $article->titre ?></td>
+                                    <td><?php echo $article->texte ?></td>
+                                    <td><button class="action-btn btn-edit">Modifier</button></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+
+                    <div class="edit-simulation-area">
+                        <p class="simulation-title">Modification Histoire : FONDATION DU CLUB</p>
+                        <form action="#" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="id" value="1">
+                            
+                            <div class="form-group">
+                                <label>Titre de l'événement :</label>
+                                <input type="text" name="titre" placeholder="Fête du sport">
+                            </div>
+                            <div class="form-group">
+                                <label>Taxonomie :</label>
+                                <input type="text" name="taxonomie" placeholder="Vie du club" value="">
+                            </div>  
+                            <div class="form-group">
+                                <label>Récit complet :</label>
+                                <textarea name="texte" rows="6" placeholder="On va boire un coup...."></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Image d'illustration :</label>

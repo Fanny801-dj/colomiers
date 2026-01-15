@@ -1,4 +1,5 @@
 <?php include __DIR__ . "/php/database.php" ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -27,50 +28,60 @@
         <img src="https://www.colomiersfoot.fr/Photo_20officielle_20N3_20-_20saison_202025-20261.jpg?v=234tb42gzagb22rk" alt="National 3">
 </section>
 
-<?php
-$gardiens = $pdo->query("SELECT * FROM joueur WHERE role = 'Gardien de but' ORDER BY nom")->fetchAll();
-$defenseurs = $pdo->query("SELECT * FROM joueur WHERE role = 'Défenseur' ORDER BY nom")->fetchAll();
-$milieux = $pdo->query("SELECT * FROM joueur WHERE role = 'Milieu de terrain' ORDER BY nom")->fetchAll();
-$attaquants = $pdo->query("SELECT * FROM joueur WHERE role = 'Attaquant' ORDER BY nom")->fetchAll();
+<?php 
+
+
+$joueurs = Database::getInstance()->LoadJoueurs();
+
+
+
 ?>
+
 <h2>Effectif 2025/26</h2>
 
 <h3>Gardiens de but</h3>
-<div class="joueurs-grid"> <?php foreach ($gardiens as $g): ?> 
+<div class="joueurs-grid"> <?php foreach ($joueurs as $g): ?> 
+  <?php if($g->poste == 'Gardien de but'): ?>
     <div class="joueur-card">
-      <img src="<?= $g['photo'] ?>" alt="Photo <?= $g['nom'] ?>">
-      <p><?= $g['prenom'] . " " . $g['nom'] ?></p>
+      <img src="<?= $g->photo ?>" alt="Photo <?= $g->photo ?>">
+      <p><?= $g->prenom . " " . $g->nom ?></p>
     </div>
+    <?php endif;?>
   <?php endforeach; ?> 
-</div> <h3>Défenseurs</h3>
-<div class="joueurs-grid">
-  <?php foreach ($defenseurs as $d): ?> 
+</div> 
+<h3>Défenseurs</h3>
+<div class="joueurs-grid"> <?php foreach ($joueurs as $d): ?> 
+  <?php if($d->poste == 'Défenseur'): ?>
     <div class="joueur-card">
-      <img src="<?= $d['photo'] ?>" alt="Photo <?= $d['nom'] ?>">
-      <p><?= $d['prenom'] . " " . $d['nom'] ?></p>
+      <img src="<?= $d->photo ?>" alt="Photo <?= $d->photo ?>">
+      <p><?= $d->prenom . " " . $d->nom ?></p>
     </div>
+    <?php endif;?>
   <?php endforeach; ?> 
-</div>
+</div> 
 
 <h3>Milieux de terrain</h3>
-<div class="joueurs-grid">
-  <?php foreach ($milieux as $m): ?> 
+<div class="joueurs-grid"> <?php foreach ($joueurs as $m): ?> 
+  <?php if($m->poste == 'Milieu de terrain'): ?>
     <div class="joueur-card">
-      <img src="<?= $m['photo'] ?>" alt="Photo <?= $m['nom'] ?>">
-      <p><?= $m['prenom'] . " " . $m['nom'] ?></p>
+      <img src="<?= $m->photo ?>" alt="Photo <?= $m->photo ?>">
+      <p><?= $m->prenom . " " . $m->nom ?></p>
     </div>
+    <?php endif;?>
   <?php endforeach; ?> 
-</div>
+</div> 
 
 <h3>Attaquants</h3>
-<div class="joueurs-grid">
-    <?php foreach ($attaquants as $a): ?> 
+<div class="joueurs-grid"> <?php foreach ($joueurs as $a): ?> 
+  <?php if($a->poste == 'Attaquant'): ?>
     <div class="joueur-card">
-      <img src="<?= $a['photo'] ?>" alt="Photo <?= $a['nom'] ?>">
-      <p><?= $a['prenom'] . " " . $a['nom'] ?></p>
+      <img src="<?= $a->photo ?>" alt="Photo <?= $a->photo ?>">
+      <p><?= $a->prenom . " " . $a->nom ?></p>
     </div>
+    <?php endif;?>
   <?php endforeach; ?> 
-</div>
+</div> 
+
 
     <section class="section-stats">
     <div class="stat-container">
