@@ -29,6 +29,22 @@ class Partenaire {
         $this->id = null;
     }
 
+    public function create() {
+        $db = Database::getInstance()->getConnection();
+
+        $sql = "INSERT INTO partenaire (photo, nom_societe)
+            VALUES (:photo, :nom_societe)";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([
+            'photo' => $this->logo,
+            'nom_societe' => $this->nom
+        ]);
+
+        
+        $this->id = (int)$db->lastInsertId();
+    }
+
+
 }
 
 ?>

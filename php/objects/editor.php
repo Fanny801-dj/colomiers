@@ -31,6 +31,25 @@ class Editor {
 
         $this->id = null;
     }
+
+    // CREATE
+    public function create() {
+        $db = Database::getInstance()->getConnection();
+
+        $sql = "INSERT INTO admin (nom, prenom, email, password, permission)
+                VALUES (:nom, :prenom, :email, :password, :permission)";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([
+            'nom' => $this->nom,
+            'prenom' => $this->prenom,
+            'email' => $this->email,
+            'password' => password_hash($this->pwd, PASSWORD_DEFAULT),
+            'permission' => $this->permission
+        ]);
+
+       
+        $this->id = (int)$db->lastInsertId();
+    }
 }
 
 ?>

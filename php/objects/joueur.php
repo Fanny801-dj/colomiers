@@ -28,6 +28,23 @@ class Joueur extends Personnel {
         $this->id = null;
     }
 
+    public function create() {
+        $db = Database::getInstance()->getConnection();
+
+        $sql = "INSERT INTO joueur (nom, prenom, role, photo)
+            VALUES (:nom, :prenom, :role, :photo)";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([
+        'nom' => $this->nom,
+        'prenom' => $this->prenom,
+        'role' => $this->poste, 
+        'photo' => $this->photo
+        ]);
+
+        $this->id = (int)$db->lastInsertId();
+    }
+
+
 }
 
 ?>
