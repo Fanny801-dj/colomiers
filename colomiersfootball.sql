@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 13, 2026 at 08:57 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Hôte : 127.0.0.1
+-- Généré le : jeu. 15 jan. 2026 à 10:06
+-- Version du serveur : 10.4.32-MariaDB
+-- Version de PHP : 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `colomiersfootball`
+-- Base de données : `colomiersfootball`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Structure de la table `admin`
 --
 
 CREATE TABLE `admin` (
@@ -36,10 +36,20 @@ CREATE TABLE `admin` (
   `permission` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `admin`
+--
+
+INSERT INTO `admin` (`id_admin`, `nom`, `prenom`, `email`, `password`, `permission`) VALUES
+(1, 'SUBRA', 'Denis', 'DenisSUBRA@gmail.com', 'Colomiersfoot', NULL),
+(2, 'SICARD', 'Bernard', 'BernardSICARD@gmail.com', 'Colomiersfoot', NULL),
+(3, 'TRAVAL MICHELET', 'Karine', 'KarineTRAVALMICHELET@gmail.com', 'Colomiersfoot', NULL),
+(5, 'AIT ALI', 'Florian', 'FlorianAITALI@gmail.com', 'Colomiersfoot', NULL);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `article`
+-- Structure de la table `article`
 --
 
 CREATE TABLE `article` (
@@ -51,10 +61,28 @@ CREATE TABLE `article` (
   `categorie` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `article`
+--
+
+INSERT INTO `article` (`id_article`, `titre`, `contenu`, `image`, `date_publication`, `categorie`) VALUES
+(1, 'Article 1', 'Contenu de l\'article 1', 'image1.jpg', '2026-01-13 17:16:05', 1),
+(2, 'Article 2', 'Contenu de l\'article 2', 'image2.jpg', '2026-01-13 17:16:05', 1),
+(3, 'Article 3', 'Contenu de l\'article 3', 'image3.jpg', '2026-01-13 17:16:05', 2),
+(4, 'Article 4', 'Contenu de l\'article 4', 'image4.jpg', '2026-01-13 17:16:05', 2),
+(5, 'Article 5', 'Contenu de l\'article 5', 'image5.jpg', '2026-01-13 17:16:05', 3),
+(6, 'Article 6', 'Contenu de l\'article 6', 'image6.jpg', '2026-01-13 17:16:05', 3),
+(7, 'Article 7', 'Contenu de l\'article 7', 'image7.jpg', '2026-01-13 17:16:05', 4),
+(8, 'Article 8', 'Contenu de l\'article 8', 'image8.jpg', '2026-01-13 17:16:05', 4),
+(9, 'Article 9', 'Contenu de l\'article 9', 'image9.jpg', '2026-01-13 17:16:05', 1),
+(10, 'Article 10', 'Contenu de l\'article 10', 'image10.jpg', '2026-01-13 17:16:05', 2),
+(11, 'Article 11', 'Contenu de l\'article 11', 'image11.jpg', '2026-01-13 17:25:55', 1),
+(12, 'Article 12', 'Contenu de l\'article 12', 'image12.jpg', '2026-01-13 17:25:55', 1);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `equipe`
+-- Structure de la table `equipe`
 --
 
 CREATE TABLE `equipe` (
@@ -65,7 +93,7 @@ CREATE TABLE `equipe` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `equipe`
+-- Déchargement des données de la table `equipe`
 --
 
 INSERT INTO `equipe` (`id_equipe`, `lien_calendrier`, `lien_classement`, `nom`) VALUES
@@ -83,18 +111,17 @@ INSERT INTO `equipe` (`id_equipe`, `lien_calendrier`, `lien_classement`, `nom`) 
 (12, 'https://occitanie.fff.fr/recherche-clubs?subtab=calendar&tab=resultats&scl=2689&competition=434770&stage=1&group=2&label=U16%20R%C3%A9gional%201%20M%20POULE%20B', 'https://occitanie.fff.fr/recherche-clubs?subtab=ranking&tab=resultats&scl=2689&competition=434770&stage=1&group=2&label=U16%20R%C3%A9gional%201%20M', 'U16 Régional 1'),
 (13, 'https://occitanie.fff.fr/recherche-clubs?subtab=calendar&tab=resultats&scl=2689&competition=434772&stage=1&group=2&label=U15%20R%C3%A9gional%201%20POULE%20B', 'https://occitanie.fff.fr/recherche-clubs?subtab=ranking&tab=resultats&scl=2689&competition=434772&stage=1&group=2&label=U15%20R%C3%A9gional%201', 'U15 Régional 1'),
 (14, 'https://occitanie.fff.fr/recherche-clubs?subtab=calendar&tab=resultats&scl=2689&competition=436462&stage=1&group=1&label=U15%20Niveau%20A%20POULE%20A', 'https://occitanie.fff.fr/recherche-clubs?subtab=ranking&tab=resultats&scl=2689&competition=436462&stage=1&group=1&label=U15%20Niveau%20A', 'U15 Niveau A'),
-(15, 'https://occitanie.fff.fr/recherche-clubs?subtab=calendar&tab=resultats&scl=2689&competition=434773&stage=1&group=3&label=U14%20R%C3%A9gional%201%20POULE%20C', 'https://occitanie.fff.fr/recherche-clubs?subtab=ranking&tab=resultats&scl=2689&competition=434773&stage=1&group=3&label=U14%20R%C3%A9gional%201', 'U14 Régional 1');
+(15, 'https://www.colomiersfoot.fr/calendrier.jpg?v=3eed1c5eacvrxwl', 'https://occitanie.fff.fr/recherche-clubs?subtab=ranking&tab=resultats&scl=2689&competition=434773&stage=1&group=3&label=U14%20R%C3%A9gional%201', 'U14 Régional 1');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `histoires`
+-- Structure de la table `histoires`
 --
 
 CREATE TABLE `histoires` (
   `id_histoire` int(11) NOT NULL,
   `titre` varchar(150) DEFAULT NULL,
-  `contenu` text DEFAULT NULL,
   `tranche_date` varchar(50) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -102,7 +129,7 @@ CREATE TABLE `histoires` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `joueur`
+-- Structure de la table `joueur`
 --
 
 CREATE TABLE `joueur` (
@@ -114,7 +141,7 @@ CREATE TABLE `joueur` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `joueur`
+-- Déchargement des données de la table `joueur`
 --
 
 INSERT INTO `joueur` (`id_joueur`, `nom`, `prenom`, `role`, `photo`) VALUES
@@ -142,7 +169,7 @@ INSERT INTO `joueur` (`id_joueur`, `nom`, `prenom`, `role`, `photo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `match`
+-- Structure de la table `match`
 --
 
 CREATE TABLE `match` (
@@ -156,46 +183,19 @@ CREATE TABLE `match` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `partenaire`
+-- Structure de la table `partenaire`
 --
 
 CREATE TABLE `partenaire` (
   `id_partenaire` int(11) NOT NULL,
   `photo` varchar(255) DEFAULT NULL,
-  `nom_societe` varchar(200) DEFAULT NULL,
-  'lien' varchar(200) DEFAULT NULL,
+  `nom_societe` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `partenaire`
---
-
-INSERT INTO `partenaire` (`id_partenaire`, `photo`, `nom_societe`) VALUES
-(1, 'https://www.colomiersfoot.fr/crbst_Logo_20Mairie0.jpg?v=2gr6ts7ir0affbt', 'Ville de Colomiers'),
-(2, 'https://www.colomiersfoot.fr/oc-1706-instit-logo_carre-quadri-150x150-72dpi0.png?v=2gq8p47ir0ah1sk', 'Région Occitanie'),
-(3, 'https://www.colomiersfoot.fr/Haute-Garonne__2831_29_logo_2015_svg.png?v=2gs2k87ir0aq2cs', 'Conseil Départemental de la Haute-Garonne'),
-(4, 'https://www.colomiersfoot.fr/la-depeche0.jpg?v=2grvz47ir0ahcfd', 'La Dépêche du Midi'),
-(5, 'https://www.colomiersfoot.fr/logo_20tpf_20alliaserv0.jpg?v=2gq8p42pgxagsl', 'Groupe Alliaserv'),
-(6, 'https://www.colomiersfoot.fr/crbst_LogoMMA22.png?v=2gr980r2p8lr83', 'MMA'),
-(7, 'https://www.colomiersfoot.fr/Logo_20intermarche_20cornebarrieu.png?v=2dt6jc7qbxfjjq4', 'Intermarché Cornebarrieu'),
-(8, 'https://www.colomiersfoot.fr/Logos_Cassin.png?v=3u3ewg8xxnpjwfa', 'Cassin Travaux Publics'),
-(9, 'https://www.colomiersfoot.fr/Afflelou.jpg?v=209xoo37bgoxl3', 'Alain Afflelou'),
-(10, 'https://www.colomiersfoot.fr/Logo_France_Mcdo.png?v=3u37488xxnpk9jn', 'McDonald\'s'),
-(11, 'https://www.colomiersfoot.fr/logo_20trevisport1.jpg?v=2grus07ir0e23kw', 'Trevi Sport'),
-(12, 'https://www.colomiersfoot.fr/11.jpg?v=43nd9c7qbwrza6t', 'Puma'),
-(13, 'https://www.colomiersfoot.fr/sup_20peinture.png?v=23vmvsw6ysjohd', 'Sup Peinture'),
-(14, 'https://www.colomiersfoot.fr/subra_20henri.jpg?v=23wp7cw6ysjohd', 'Subra Henry'),
-(15, 'https://www.colomiersfoot.fr/toshiba-logo-1.jpg?v=23ws74w6ysjohd', 'Toshiba'),
-(16, 'https://www.colomiersfoot.fr/logo_agence_pibrac.png?v=23wtzsw6ysjohd', 'Selectour'),
-(17, 'https://www.colomiersfoot.fr/Cazenave_20Autos.jpg?v=20a8go2gzafocuu1', 'CZN Machinery'),
-(18, 'https://www.colomiersfoot.fr/tgfluides_logo.jpg?v=209mwo2gzafoh2jl', 'TGF'),
-(19, 'https://www.colomiersfoot.fr/Ace_20Hotel.png?v=209o3s2gzafonhvv', 'ACE Hôtel'),
-(20, 'https://www.colomiersfoot.fr/Eat_20Salad.jpg?v=20abgg2gzafonpe1', 'Eat Salad');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `staff`
+-- Structure de la table `staff`
 --
 
 CREATE TABLE `staff` (
@@ -207,7 +207,7 @@ CREATE TABLE `staff` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `staff`
+-- Déchargement des données de la table `staff`
 --
 
 INSERT INTO `staff` (`id_staff`, `nom`, `prenom`, `role`, `photo`) VALUES
@@ -252,7 +252,7 @@ INSERT INTO `staff` (`id_staff`, `nom`, `prenom`, `role`, `photo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `staff_equipe`
+-- Structure de la table `staff_equipe`
 --
 
 CREATE TABLE `staff_equipe` (
@@ -261,7 +261,7 @@ CREATE TABLE `staff_equipe` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `staff_equipe`
+-- Déchargement des données de la table `staff_equipe`
 --
 
 INSERT INTO `staff_equipe` (`id_staff`, `id_equipe`) VALUES
@@ -286,122 +286,122 @@ INSERT INTO `staff_equipe` (`id_staff`, `id_equipe`) VALUES
 (21, 13);
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `admin`
+-- Index pour la table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`);
 
 --
--- Indexes for table `article`
+-- Index pour la table `article`
 --
 ALTER TABLE `article`
   ADD PRIMARY KEY (`id_article`);
 
 --
--- Indexes for table `equipe`
+-- Index pour la table `equipe`
 --
 ALTER TABLE `equipe`
   ADD PRIMARY KEY (`id_equipe`);
 
 --
--- Indexes for table `histoires`
+-- Index pour la table `histoires`
 --
 ALTER TABLE `histoires`
   ADD PRIMARY KEY (`id_histoire`);
 
 --
--- Indexes for table `joueur`
+-- Index pour la table `joueur`
 --
 ALTER TABLE `joueur`
   ADD PRIMARY KEY (`id_joueur`);
 
 --
--- Indexes for table `match`
+-- Index pour la table `match`
 --
 ALTER TABLE `match`
   ADD PRIMARY KEY (`id_match`);
 
 --
--- Indexes for table `partenaire`
+-- Index pour la table `partenaire`
 --
 ALTER TABLE `partenaire`
   ADD PRIMARY KEY (`id_partenaire`);
 
 --
--- Indexes for table `staff`
+-- Index pour la table `staff`
 --
 ALTER TABLE `staff`
   ADD PRIMARY KEY (`id_staff`);
 
 --
--- Indexes for table `staff_equipe`
+-- Index pour la table `staff_equipe`
 --
 ALTER TABLE `staff_equipe`
   ADD PRIMARY KEY (`id_staff`,`id_equipe`),
   ADD KEY `id_equipe` (`id_equipe`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT pour la table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `article`
+-- AUTO_INCREMENT pour la table `article`
 --
 ALTER TABLE `article`
-  MODIFY `id_article` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_article` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `equipe`
+-- AUTO_INCREMENT pour la table `equipe`
 --
 ALTER TABLE `equipe`
   MODIFY `id_equipe` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `histoires`
+-- AUTO_INCREMENT pour la table `histoires`
 --
 ALTER TABLE `histoires`
   MODIFY `id_histoire` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `joueur`
+-- AUTO_INCREMENT pour la table `joueur`
 --
 ALTER TABLE `joueur`
   MODIFY `id_joueur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT for table `match`
+-- AUTO_INCREMENT pour la table `match`
 --
 ALTER TABLE `match`
   MODIFY `id_match` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `partenaire`
+-- AUTO_INCREMENT pour la table `partenaire`
 --
 ALTER TABLE `partenaire`
-  MODIFY `id_partenaire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_partenaire` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `staff`
+-- AUTO_INCREMENT pour la table `staff`
 --
 ALTER TABLE `staff`
   MODIFY `id_staff` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `staff_equipe`
+-- Contraintes pour la table `staff_equipe`
 --
 ALTER TABLE `staff_equipe`
   ADD CONSTRAINT `staff_equipe_ibfk_1` FOREIGN KEY (`id_staff`) REFERENCES `staff` (`id_staff`),
