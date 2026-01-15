@@ -25,6 +25,22 @@ class Histoire extends Publication {
         $this->id = null;
     }
 
+    public function create() {
+        $db = Database::getInstance()->getConnection();
+
+        $sql = "INSERT INTO histoire (titre, tranche_date, image)
+            VALUES (:titre, :tranche_date, :image)";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([
+        'titre' => $this->titre,
+        'tranche_date' => $this->tranche_de_date,
+        'image' => $this->image
+        ]);
+
+        $this->id = (int)$db->lastInsertId();
+    }
+
+
 }
 
 ?>

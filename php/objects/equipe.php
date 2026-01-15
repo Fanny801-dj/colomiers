@@ -27,6 +27,23 @@ class Equipe {
 
         $this->id = null;
     }
+
+
+    public function create() {
+        $db = Database::getInstance()->getConnection();
+
+        $sql = "INSERT INTO equipe (nom, lien_calendrier, lien_classement)
+            VALUES (:nom, :lien_calendrier, :lien_classement)";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([
+        'nom' => $this->nom,
+        'lien_calendrier' => $this->lien_calendrier,
+        'lien_classement' => $this->lien_classement
+        ]);
+        
+        $this->id = (int)$db->lastInsertId();
+    }
+
 }
 
 
