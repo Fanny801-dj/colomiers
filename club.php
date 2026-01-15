@@ -7,10 +7,11 @@
     <link rel="stylesheet" href="css/club.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
-    <title>Document</title>
+    <title>Le Club</title>
 </head>
-<?php include "./php/components/header.php"; ?>
 <body>
+        <?php include "./php/components/header.php"; ?>
+
  <main>
     <h1>Le Club</h1>
 
@@ -60,8 +61,9 @@
     </section>
 
  </main>
-</body>
-<?php
+ <?php
  include "./php/components/footer.php";
 ?>
+</body>
+
 </html>
