@@ -19,7 +19,7 @@ class Histoire extends Publication {
         }
 
         $db = Database::getInstance()->getConnection();
-        $stmt = $db->prepare("DELETE FROM histoire WHERE id_histoire = :id");
+        $stmt = $db->prepare("DELETE FROM histoires WHERE id_histoire = :id");
         $stmt->execute(['id' => $this->id]);
 
         $this->id = null;
