@@ -80,6 +80,10 @@ h1, h2, h3, .site-title, .section-title {
 img { max-width: 100%; height: auto; display: block; }
 a { text-decoration: none; color: inherit; transition: 0.3s; }
 
+ul {
+    list-style: none;
+}
+
 /* COMPOSANTS RÉUTILISABLES */
 .container {
     max-width: 1200px;
@@ -121,7 +125,7 @@ a { text-decoration: none; color: inherit; transition: 0.3s; }
 .main-logo { height: 80px; transition: transform 0.3s; }
 .main-logo:hover { transform: scale(1.05); }
 
-.nav-menu ul { display: flex; gap: 25px; list-style: none; }
+.nav-menu ul { display: flex; gap: 25px;}
 .nav-menu a { font-weight: 700; color: var(--dark-blue); }
 .nav-menu a:hover { color: var(--primary-blue); }
 
@@ -803,7 +807,6 @@ a { text-decoration: none; color: inherit; transition: 0.3s; }
     font-family: var(--font-titles);
     font-weight: 700;
     cursor: pointer;
-    list-style: none;
     display: flex;
     justify-content: space-between;
     align-items: center;

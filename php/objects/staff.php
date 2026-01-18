@@ -5,12 +5,15 @@ include_once __DIR__ . '/personnel.php';
 class Staff extends Personnel {
     public $email;
 
+    public $state;
+
     public function __construct($id, $nom, $prenom, $role, $email) {
         $this->id = $id;
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->role = $role;
         $this->email = $email;
+        $this->state = null; //équivalent de undefined parce que on le défini dans le script d'api
     }
     public function save() {
         $db = Database::getInstance()->getConnection();

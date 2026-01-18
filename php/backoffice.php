@@ -154,7 +154,6 @@ if (isset($_POST["action"])) {
     }
 }
 
-
 // faut mettre du ajax mais jsplus
 
 ?>

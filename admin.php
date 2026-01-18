@@ -18,7 +18,9 @@ if (!isset($_SESSION['admin_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin US Colomiers</title>
     <link rel="stylesheet" href="./css/style.css">
-    <script src="./js/backoffice.js" defer></script> <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
+    <script src="./js/mustache.min.js" defer></script> 
+    <script src="./js/backoffice.js" defer></script> 
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
 </head>
 <body>
 
@@ -69,24 +71,50 @@ if (!isset($_SESSION['admin_id'])) {
                         <td><?= htmlspecialchars($team->nom) ?></td>
                         <td>
                             <?php $listeAcceptedStaff = [];?>
-                            <?php foreach(Database::getInstance()->loadStaffsByEquipe($team->id) as $staff): ?>
-                                <?php $listeAcceptedStaff[] = $staff->id;?>
-                                <div value="<?= $staff->id ?>">
-                                    <?= htmlspecialchars($staff->nom . " " . $staff->prenom) ?>
-                                    <button>
-                                        croix
-                                    </button>
-                                </div>
-                            <?php endforeach; ?>
-                            <select name="staff[]" multiple>
-                                <?php foreach(Database::getInstance()->loadStaffs() as $staff): ?>
-                                    <?php if (!in_array($staff->id, $listeAcceptedStaff)):?>
-                                        <option class="option-staff" value="<?= $staff->id ?>">
-                                            <?= htmlspecialchars($staff->nom . " " . $staff->prenom) ?>
-                                        </option>
-                                    <?php endif;?>
-                                <?php endforeach; ?>
-                            </select>
+
+                            <form class="lazy-link" data-equipe="<?= $team->id?>">
+                                <!-- Ici sont générés les staffs qui ont été séléctionnés -->
+                            </form>
+
+                            <div id="selectedstafflist<?=$team->id?>">
+
+                            </div>
+
+                            <div id="notselectedstafflist<?=$team->id?>">
+
+                            </div>
+
+                            <script id="templateStaff" type="text/html">
+                                <ul>
+                                    {{#.}}
+                                    <li>
+                                        <div class="delete-staff">
+                                            <button  type="button"
+                                                data-staffid="{{id}}"
+                                                data-teamid="{{idteam}}">
+                                                delete
+                                            </button>
+                                            {{nom}} {{prenom}}
+                                        </div>
+                                    </li>
+                                    {{/.}}
+                                </ul>
+                            </script>
+
+                            <script id="templateStaffOption" type="text/html">
+                                <ul>
+                                    {{#.}}
+                                    <li>
+                                        <button type="button" class="option-staff"
+                                            data-staffid="{{id}}"
+                                            data-teamid="{{idteam}}">
+                                            {{nom}} {{prenom}}
+                                        </button>
+                                    </li>
+                                    {{/.}}
+                                </ul>
+                            </script>
+
                         </td>
                                 <td>
                                     <button 

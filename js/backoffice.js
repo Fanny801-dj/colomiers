@@ -19,10 +19,6 @@ function setupListeners() {
 
     let formlist = document.querySelectorAll('.edit-simulation-area');
 
-
-
-
-
     editPartenaireButtons.forEach(button => {
         button.addEventListener('click', () => {
     
@@ -157,32 +153,111 @@ function setupListeners() {
     });
 }
 
-function optionClick(event) {
+function addStaffEquipe(event) {
 
-    // requete AJAX
-	var xhttp = new XMLHttpRequest();
-	xhttp.open("GET", "API/listerRessources.php?idsae=" + idSAE, true); //la y'a ce qu'on veut
+    let idStaff = event.target.dataset.staffid;
+    let idEquipe = event.target.dataset.teamid;
+    
+    fetch("./php/api/script.php", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            action: "create-link",
+            id_staff: idStaff,
+            id_equipe: idEquipe
+        })
+    })
+    .then(response => {
+        // Vérifie si la requête 
+        // HTTP a réussi
+        updateStaffEquipe(idEquipe);
+        if (!response.ok) {
+            throw new Error("Erreur HTTP : " + response.status);
+        }
+
+    });
+
+    console.log(idStaff, " ", idEquipe);
+}
+
+function removeStaffEquipe(event) {
+
+    let idStaff = event.target.dataset.staffid;
+    let idEquipe = event.target.dataset.teamid;
+    
+    fetch("./php/api/script.php", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            action: "delete-link",
+            id_staff: idStaff,
+            id_equipe: idEquipe
+        })
+    })
+    .then(response => {
+        // Vérifie si la requête 
+        // HTTP a réussi
+        updateStaffEquipe(idEquipe);
+        if (!response.ok) {
+            throw new Error("Erreur HTTP : " + response.status);
+        }
+
+    });
+
+    console.log(idStaff, " ", idEquipe);
+}
+
+function updateStaffEquipe(idEquipe) {
+
+    var xhttp = new XMLHttpRequest();
+	xhttp.open("GET", "./php/api/script.php?action=get-link&id_equipe=" + idEquipe, true);
 	xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	xhttp.onreadystatechange = function() {
+    xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			// Response
 			var response = JSON.parse(this.responseText); 
 		
-			const template = document.getElementById('templateressources').innerHTML;
-			const rendered = Mustache.render(template, response.ressources);
-			document.getElementById('divressources').innerHTML = rendered;
+			const templateAssigned = document.getElementById('templateStaff').innerHTML;
+            const templateNotAssigned = document.getElementById('templateStaffOption').innerHTML;
+            
+            // On ajoute idteam à chaque staff pour Mustache
+            let staffData = response.staffs.map(staff => ({
+                ...staff,
+                idteam: response.idteam
+            }));
+
+            // On sépare selon l'état pour pouvoir rendre à la fois ceux séléctionnés et ceux pas séléctionnés
+            let staffAssigned = staffData.filter(staff => staff.state === true);
+            let staffNotAssigned = staffData.filter(staff => staff.state === false);
+
+            const renderedAssigned = Mustache.render(templateAssigned, staffAssigned);
+            const renderedNotAssigned = Mustache.render(templateNotAssigned, staffNotAssigned);
+
+			let containerAssigned = document.getElementById('selectedstafflist' + idEquipe);
+            let containerNotAssigned = document.getElementById('notselectedstafflist' + idEquipe);
+
+            containerAssigned.innerHTML = renderedAssigned;
+            containerNotAssigned.innerHTML = renderedNotAssigned;
+
+            containerAssigned.querySelectorAll('.delete-staff').forEach(btn => btn.addEventListener('click', e => {
+                removeStaffEquipe(e);
+            }))
+
+            containerNotAssigned.querySelectorAll('.option-staff').forEach(btn => btn.addEventListener('click', e => {
+                addStaffEquipe(e);
+            }))
+
+            console.log(response);
 		}
 	};
-	xhttp.send();
 
-    console.log(event.target.value);
-    //ici envoyer le code^^
+	xhttp.send();
 }
 
 function setupAjaxListeners() {
     document.querySelectorAll(".option-staff").forEach(option => {
         option.addEventListener("click", (event) => {
-            optionClick(event);
+            addStaffEquipe(event);
         });
     });
 }
@@ -190,6 +265,15 @@ function setupAjaxListeners() {
 function init() {
     setupListeners();
     setupAjaxListeners();
-}
+
+
+    document.querySelectorAll('.lazy-link').forEach(form => {
+        updateStaffEquipe(form.dataset.equipe);
+    });
+
+    document.querySelectorAll('.lazy-link-remove').forEach(form => {
+        updateStaffEquipe(form.dasaset.equipe)
+    })
+};
 
 document.addEventListener("DOMContentLoaded", init);
