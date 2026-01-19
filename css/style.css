@@ -36,7 +36,7 @@
     --primary-blue: #0000EF;
     --dark-blue: #0A0E2D;
     --platinum: #EAEDEE;
-    --white: #FFFFFF;
+    --white: #ffffff;
     --grey-text: #666666;
     --grey-placeholder: #D3D3D3;
 
@@ -91,6 +91,10 @@ a {
     text-decoration: none;
     color: inherit;
     transition: 0.3s;
+}
+
+ul {
+    list-style: none;
 }
 
 /* COMPOSANTS RÉUTILISABLES */
@@ -159,6 +163,9 @@ a {
 .nav-menu a:hover {
     color: var(--primary-blue);
 }
+.nav-menu ul { display: flex; gap: 25px;}
+.nav-menu a { font-weight: 700; color: var(--dark-blue); }
+.nav-menu a:hover { color: var(--primary-blue); }
 
 /* HERO SECTION */
 .hero-section {
@@ -372,14 +379,44 @@ a {
     gap: 25px;
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE DES BLOCS STANDARDS */
 @media (max-width: 768px) {
 
     .header-container,
     .footer-container {
         flex-direction: column;
         gap: 20px;
+    /* HEADER : Horizontal */
+    .header-container {
+        flex-direction: row; 
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+    }
+
+    .footer-container {
+        flex-direction: row;    
+        flex-wrap: wrap;   
+        justify-content: space-between;
+        gap: 15px;        
+    }
+
+    /* Ordre d'affichage et tailles */
+    .footer-left {
+        order: 1;                 /* Logo en premier */
+    }
+
+    .footer-right {
+        order: 2;   
+        flex-direction: row;    
+        gap: 10px;
+    }
+
+    .footer-center {
+        order: 3;        
+        width: 100%;             
         text-align: center;
+        margin-top: 10px;
     }
 
     .nav-menu ul {
@@ -405,6 +442,11 @@ a {
         height: 1px;
         margin: 20px 0;
     }
+    
+    .hero-title { font-size: 2rem; }
+    
+    .match-box { flex-direction: column; text-align: center; }
+    .separator { width: 100%; height: 1px; margin: 20px 0; }
 }
 
 /* Titres spécifiques à la page club */
@@ -505,8 +547,7 @@ a {
     }
 }
 
-/* =========================================
-   PAGE: NATIONAL 3  */
+/* PAGE: NATIONAL 3  */
 
 /* Hero N3 */
 .hero-nat3 {
@@ -695,7 +736,7 @@ a {
     }
 }
 
-/*  PAGE: AUTRES ÉQUIPES  */
+/* PAGE: AUTRES ÉQUIPES  */
 
 /* Espacement global des sections */
 .team-category {
@@ -834,6 +875,7 @@ a {
     display: flex;
     /* pour centrer l'image */
     justify-content: center;
+    justify-content: center; 
 }
 
 .social-box img {
@@ -944,4 +986,366 @@ a {
 .classement tr:hover,
 .calendar tr:hover {
     background: #202060;
+.hidden {
+    display: none;
+}
+
+
+.formulaire {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px;
+    min-height: 65vh;
+    align-items: center;     
+    min-height: 63vh;        
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 40%;
+}
+
+.form input, .form button {
+    padding: 20px;
+}
+
+.form button {
+    cursor: pointer;
+}
+/* 
+PAGE ADMINISTRATION */
+
+}
+
+/* PAGE ADMINISTRATION */
+
+.admin-container {
+    padding-bottom: var(--space-xl);
+}
+
+.admin-header {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    background: var(--platinum);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+}
+
+.admin-subtitle {
+    border-left: 5px solid var(--primary-blue);
+    padding-left: 15px;
+    margin-bottom: var(--space-md);
+    color: var(--dark-blue);
+    font-size: 1.5rem;
+}
+
+/* --- BLOCS DÉPLIABLES (DETAILS) --- */
+.admin-details {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-main);
+    margin-bottom: var(--space-lg);
+    overflow: hidden;
+}
+
+.admin-details summary {
+    background-color: var(--dark-blue);
+    color: var(--white);
+    padding: 15px 20px;
+    font-family: var(--font-titles);
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-details summary::after {
+    content: '+';
+    font-size: 1.5rem;
+}
+
+.admin-details[open] summary::after {
+    content: '-';
+}
+
+/* --- FORMULAIRES ADMIN --- */
+.admin-form {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: var(--radius-md);
+    border: 1px solid #ddd;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 700;
+    color: var(--dark-blue);
+    font-family: var(--font-titles);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+}
+
+.form-group input:focus {
+    border-color: var(--primary-blue);
+    outline: none;
+}
+
+/* Bouton Admin */
+.btn-admin {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 700;
+    transition: background 0.2s;
+}
+
+.btn-admin:hover {
+    background-color: var(--dark-blue);
+}
+
+/* --- TABLEAUX ADMIN --- */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.admin-table th {
+    background-color: var(--platinum);
+    color: var(--dark-blue);
+    padding: 12px;
+    text-align: left;
+    font-family: var(--font-titles);
+    border-bottom: 2px solid var(--dark-blue);
+}
+
+.admin-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.admin-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Boutons Actions (Petit) */
+.action-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    margin-right: 5px;
+}
+
+.btn-edit { background-color: #ffc107; color: #000; }
+.btn-delete { background-color: #dc3545; color: #fff; }
+
+/* ZONE DE MODIFICATION */
+.edit-simulation-area {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #eef2f5;
+    border-left: 5px solid #ffc107;
+    border-radius: var(--radius-sm);
+}
+
+.simulation-title {
+    font-weight: bold;
+    color: var(--dark-blue);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+/* STYLE DU MENU BURGER & RESPONSIVE */
+
+.burger-icon {
+    display: none; /* Caché par défaut sur desktop */
+}
+
+/* GESTION MOBILE */
+@media (max-width: 768px) {
+
+    /* LE BOUTON BURGER */
+    .burger-icon {
+        display: block; 
+        cursor: pointer;
+        width: 30px; 
+    }
+
+    /* Les 3 petites barres */
+    .burger-icon span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: var(--dark-blue);
+        margin: 6px 0;
+        border-radius: 2px;
+        transition: 0.3s;
+    }
+
+    /* Animation quand le menu est ouvert */
+    .burger-icon.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+    .burger-icon.open span:nth-child(2) { opacity: 0; }
+    .burger-icon.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+    /* MENU NAV */
+    .nav-menu ul {
+        display: none;
+        flex-direction: column; /* Le menu déroulant reste en colonne (vertical) */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--white);
+        padding: 20px 0;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        text-align: center;
+        gap: 20px;
+        z-index: 999;
+    }
+
+    /* Quand on clique la classe .active s'affiche */
+    .nav-menu ul.active {
+        display: flex;
+    }
+}
+
+/* STYLE STAFF */
+
+/* Conteneur des étiquettes */
+.staff-chips-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;      
+    margin-top: 10px;
+}
+
+.staff-chip {
+    display: inline-flex; 
+    align-items: stretch;       /* étire les enfants pour qu'ils aient la même hauteur */
+    border-radius: 6px;   
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    background-color: var(--white);
+}
+
+/* Partie Gauche en jaune */
+.staff-name {
+    background-color: #ffc107;
+    color: #000;             
+    padding: 8px 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+}
+
+/* Partie Droite en rouge */
+.staff-delete-btn {
+    background-color: #dc3545; 
+    color: white;
+    border: none;
+    padding: 0 12px;
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+
+.staff-delete-btn:hover {
+    background-color: #a71d2a;
+}
+
+/* Style liste équipe */
+
+.staff-pick-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--grey-text);
+    margin: 15px 0 10px 0;
+    font-family: var(--font-titles);
+    text-transform: uppercase;
+}
+
+.available-staff-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;  
+}
+
+/* bouton staff non sélectionné */
+.option-staff {
+    background-color: var(--platinum);
+    color: var(--dark-blue);
+    border: 1px solid transparent;    
+    padding: 6px 14px;
+    border-radius: 20px;             
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.plus-icon {
+    font-weight: bold;
+    font-size: 1.1rem;
+    line-height: 0.8;
+    color: var(--grey-text);
+    transition: color 0.2s;
+}
+
+/* Effet hover */
+.option-staff:hover {
+    background-color: var(--white);
+    color: var(--primary-blue);
+    border-color: var(--primary-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 3px 6px rgba(0, 0, 239, 0.15);
+}
+
+.option-staff:hover .plus-icon {
+    color: var(--primary-blue);
+}
+
+/* Effet Clique */
+.option-staff:active {
+    transform: translateY(0);
+    background-color: var(--primary-blue);
+    color: var(--white);
 }

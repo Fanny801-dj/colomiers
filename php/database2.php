@@ -6,14 +6,13 @@
 // print_r($a);
 
 include __DIR__ . "/../configuration/config.php";
-include __DIR__ . "/objects/article.php";
+include __DIR__ . "/objects/article2.php";
 include __DIR__ . "/objects/histoire.php";
 include __DIR__ . "/objects/partenaires.php";
 include __DIR__ . "/objects/equipe.php";
 include __DIR__ . "/objects/joueur.php";
 include __DIR__ . "/objects/staff.php";
 include __DIR__ . "/objects/staffequipe.php";
-include __DIR__ . "/objects/classement.php";
 
 class Database {
     private static $instance = null;
@@ -49,7 +48,15 @@ class Database {
     public function getConnection(){
         return $this->connection;
     }
-    
+
+
+    public function loadObjects($sql,$className) {
+        $query = $this->connection->query($sql);
+
+        $data = $query->fetchAll(PDO::FETCH_CLASS,$className);
+        return $data;
+    }
+
     public function loadArticles() {
         $articles = [];
 
@@ -58,15 +65,16 @@ class Database {
 
         $rows = $query->fetchAll(PDO::FETCH_ASSOC);
 
-        foreach ($rows as $row) {
-            $articles[] = new Article(
-                $row['id_article'],
-                $row['date_publication'],
-                $row['titre'],
-                $row['contenu'],
-                $row['image'],
-                $row['categorie']
-            );
+        foreach ($rows as $row) {   
+            $article = new Article();
+            $article->id = $row['id_article'];
+
+            $article->date = $row['date_publication'];
+            $article->titre = $row['titre'];
+            $article->texte = $row['contenu'];
+            $article->image = $row['image'];
+            $article->categorie = $row['categorie'];
+                $articles[] = $article;
         }
         return $articles;
     }
@@ -79,14 +87,15 @@ class Database {
     
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        return new Article(
-            $result['id_article'],
-            $result['date_publication'],
-            $result['titre'],
-            $result['contenu'],
-            $result['image'],
-            $result['categorie']
-        );
+        $article = new Article();
+        
+        $article->id = $result['id_article'];
+        $article->date = $result['date_publication'];
+        $article->titre = $result['titre'];
+        $article->texte = $result['contenu'];
+        $article->image = $result['image'];
+        $article->categorie = $result['categorie'];
+        return $article;
     }
 
     public function loadHistories() {
@@ -309,26 +318,6 @@ class Database {
             $result['id_staff'],
         );
     return $staffs;
-    }
-
-    public function loadClassements() {
-        $array = [];
-        
-        $sql = "SELECT * FROM classement";
-        $query = $this->connection->query($sql);
-
-        $rows = $query->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach ($rows as $row) {
-            $var = new Classement(
-                $row['nom_team'],
-                $row['position'],
-                $row['points']
-            );
-            $var->id = $row['id_classement'];
-            $array[] = $var;
-        }
-        return $array;
     }
 }
 

@@ -10,7 +10,7 @@ class Admin extends Editor {
     }
 
         $db = Database::getInstance()->getConnection();
-        $stmt = $db->prepare("DELETE FROM admin WHERE id_admin = :id"); /
+        $stmt = $db->prepare("DELETE FROM admin WHERE id_admin = :id");
         $stmt->execute(['id' => $this->id]);
 
         $this->id = null;
@@ -50,13 +50,8 @@ class Admin extends Editor {
                 'password' => password_hash($this->pwd, PASSWORD_DEFAULT),
                 'permission' => $this->permission
             ]);
+        }
     }
-}
-
-
-   
-
-
 }
 
 ?>
