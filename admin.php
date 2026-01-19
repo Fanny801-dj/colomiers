@@ -1,7 +1,12 @@
 <?php 
 session_start();
 
+if (!isset($_SESSION['admin_id'])) {
+    header("Location: login.php");
+    exit();
+}
 // est ce que l'administrateur est connecté
+
 if (!isset($_SESSION['admin_id'])) {
     // si non on le dirige vers login
     header("Location: login.php");
@@ -22,6 +27,8 @@ if (!isset($_SESSION['admin_id'])) {
     <script src="./js/backoffice.js" defer></script> 
     <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
 </head>
+
+
 <body>
 
     <?php include_once __DIR__ . '/php/components/header.php'; ?>
@@ -30,6 +37,7 @@ if (!isset($_SESSION['admin_id'])) {
         
         <div class="admin-header">
             <h1 class="section-title">Administration du Site</h1>
+            <a href="logout.php" class="btn-main">Déconnexion</a></br>
             <p>Gérez les sponsors, équipes et l'histoire du club.</p>
         </div>
 
@@ -39,18 +47,12 @@ if (!isset($_SESSION['admin_id'])) {
         <summary>Gérer les équipes (Ajout / Modif)</summary>
         <div style="padding: 20px;">
             <h3>+ Ajouter une nouvelle équipe</h3>
-            <form action="./php/backoffice.php" method="POST" enctype="multipart/form-data" class="admin-form" style="margin-bottom:30px;">
-                <input type="hidden" name="action" value="create-team">
-                <div class="form-group">
-                    <label>Nom de l'équipe</label>
-                    <input type="text" name="nom">
-                </div>
-                <div class="form-group">
-                    <label>Logo</label>
-                    <input type="file" name="logo">
-                </div>
-                <button class="btn-admin">Ajouter</button>
-            </form>
+
+            <div class="form-group">
+                <label>Nom de l'équipe</label>
+                <input type="text" id="create-team-nom" name="create-team-nom">
+            </div>
+            <button type="button" id="create-team" class="btn-admin">Ajouter</button>
 
             <hr style="margin: 30px 0; border:0; border-top:1px solid #ddd;">
 
@@ -58,100 +60,35 @@ if (!isset($_SESSION['admin_id'])) {
             <table class="admin-table">
                 <thead>
                     <tr>
-                        <th>Logo</th>
                         <th>Nom</th>
                         <th>Staff</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <?php foreach(Database::getInstance()->loadEquipes() as $team): ?>
-                    <tr>
-                        <td><?= $team->logo ?? '(img)' ?></td>
-                        <td><?= htmlspecialchars($team->nom) ?></td>
-                        <td>
-                            <?php $listeAcceptedStaff = [];?>
+                <tbody id="container-team">
+                </tbody>
+            </table>
 
-                            <form class="lazy-link" data-equipe="<?= $team->id?>">
-                                <!-- Ici sont générés les staffs qui ont été séléctionnés -->
-                            </form>
-
-                            <div id="selectedstafflist<?=$team->id?>">
-
-                            </div>
-
-                            <div id="notselectedstafflist<?=$team->id?>">
-
-                            </div>
-
-                            <script id="templateStaff" type="text/html">
-                                <div class="staff-chips-container">
-                                    {{#.}}
-                                    <div class="staff-chip">
-                                        <span class="staff-name">{{nom}} {{prenom}}</span>
-                                        
-                                        <button type="button" class="staff-delete-btn"
-                                            data-staffid="{{id}}"
-                                            data-teamid="{{idteam}}"
-                                            title="Retirer ce membre">
-                                            &times; </button>
-                                    </div>
-                                    {{/.}}
-                                </div>
-                            </script>
-
-                            <script id="templateStaffOption" type="text/html">
-                                <p class="staff-pick-title">Ajouter un membre :</p>
-                                <div class="available-staff-container">
-                                    {{#.}}
-                                    <button type="button" class="option-staff"
-                                        data-staffid="{{id}}"
-                                        data-teamid="{{idteam}}">
-                                        <span class="plus-icon">+</span> {{nom}} {{prenom}}
-                                    </button>
-                                    {{/.}}
-                                </div>
-                            </script>
-
-                        </td>
-                                <td>
-                                    <button 
-                                        type="button" 
-                                        class="action-btn btn-edit btn-team-edit"
-                                        data-id="<?= $team->id ?>"
-                                        data-nom="<?= htmlspecialchars($team->nom, ENT_QUOTES) ?>"
-                                        data-logo="<?= htmlspecialchars($team->logo, ENT_QUOTES) ?>"
-                                        >Modifier
-                                    </button>
-                                    <form method="POST" action="./php/backoffice.php" style="display:inline;">
-                                        <input type="hidden" name="action" value="delete-team">
-                                        <input type="hidden" name="id" value="<?= $team->id ?>">
-                                        <button class="action-btn btn-delete">Supprimer</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                        
 
                 <div class="edit-simulation-area hidden">
                     <p class="simulation-title">Modification Équipe : <span id="titre-team-edit"></span></p>
-                    <form method="POST" action="./php/backoffice.php" id="edit-team" enctype="multipart/form-data">
-                        <input type="hidden" name="action" value="edit-team">
-                        <input type="hidden" name="id">
-
+                    <div id="edit-team" enctype="multipart/form-data">
+                        <input type="hidden" id="id-edit-team">
                         <div class="form-group">
                             <label>Nom :</label>
-                            <input type="text" name="nom" placeholder="Nom de l'équipe">
+                            <input type="text" id="nom-edit-team" placeholder="Nom de l'équipe">
                         </div>
-
                         <div class="form-group">
-                            <label>Logo :</label>
-                            <input type="file" name="logo">
+                            <label>Lien classement :</label>
+                            <input type="text" id="lien-classement-edit-team" placeholder="Classement">
                         </div>
-                    
-                        <button type="submit" class="btn-admin">Sauvegarder l'équipe</button>
-                    </form>
+                        <div class="form-group">
+                            <label>Lien calendrier :</label>
+                            <input type="text" id="lien-calendrier-edit-team" placeholder="Calendrier">
+                        </div>
+                        <button id="validate-team-button" type="button" class="btn-admin">Sauvegarder l'équipe</button>
+                    </div>
                 </div>
             </div>
         </details>
@@ -566,3 +503,79 @@ if (!isset($_SESSION['admin_id'])) {
     <?php include_once __DIR__ . '/php/components/footer.php'; ?>
 </body>
 </html>
+
+<script id="templateStaff" type="text/html">
+    <ul>
+        {{#.}}
+        <li>
+            <div class="delete-staff">
+                <button  type="button"
+                    data-staffid="{{id}}"
+                    data-teamid="{{idteam}}">
+                    delete
+                </button>
+                {{nom}} {{prenom}}
+            </div>
+        </li>
+        {{/.}}
+    </ul>
+</script>
+
+<script id="templateStaffOption" type="text/html">
+    <ul>
+        {{#.}}
+        <li>
+            <button type="button" class="option-staff"
+                data-staffid="{{id}}"
+                data-teamid="{{idteam}}">
+                {{nom}} {{prenom}}
+            </button>
+        </li>
+        {{/.}}
+    </ul>
+</script>
+
+<script id="templateTeam" type="text/html">
+
+    {{#teams}}
+    <tr>
+        <td> {{ nom }} </td>
+        <td>
+            <form class="lazy-link" data-equipe="{{id}}">
+                
+                <!-- Ici sont générés les staffs qui ont été séléctionnés -->
+            
+            </form>
+
+            <div id="selectedstafflist{{id}}">
+
+            </div>
+
+            <div id="notselectedstafflist{{id}}">
+
+            </div> 
+        </td>
+        <td>
+            <button 
+                type="button" 
+                class="action-btn btn-edit btn-team-edit"
+                data-id="{{ id }}"
+                data-nom="{{ nom }}"
+                data-lien-classement="{{ lien_classement }}"
+                data-lien-calendrier="{{ lien_calendrier }}"
+                >Modifier
+            </button>
+            <button
+                type="button"
+                class="action-btn btn-delete btn-team-delete"
+                data-id="{{ id }}"
+                >Supprimer
+            </button>
+        </td>
+    </tr>
+    {{/teams}}
+</script>
+
+<!-- il faut recopier templateTeam et la remplacer dans le front -->
+
+<!-- il faut changer le html dans le front pour que ça prenne les bons id / classes -->

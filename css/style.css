@@ -748,6 +748,8 @@ ul {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 50px;
+    min-height: 65vh;
     align-items: center;     
     min-height: 63vh;        
 }
@@ -763,9 +765,10 @@ ul {
 }
 
 .form button {
-    background: #003366;
-    color: white;
     cursor: pointer;
+}
+/* 
+PAGE ADMINISTRATION */
 
 }
 
